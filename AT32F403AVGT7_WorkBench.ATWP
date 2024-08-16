@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Root>
+    <MCUInfo>
+        <MCUSerials>AT32F403A</MCUSerials>
+        <MCUName>AT32F403AVGT7</MCUName>
+        <MCUPackage>LQFP100</MCUPackage>
+    </MCUInfo>
+    <DEBUG>
+        <Mode>
+            <ModeSub name="Debug interface" value="SWD"/>
+        </Mode>
+    </DEBUG>
+    <SPI1>
+        <Mode>
+            <ModeSub name="Mode" value="Full_Duplex_Slave"/>
+            <ModeSub name="CS_Signal" value="CS_Signal_Hard_Input"/>
+        </Mode>
+        <Parameters>
+            <ParametersSub name="TransmissionMode" value="SPI_TRANSMIT_FULL_DUPLEX"/>
+            <ParametersSub name="FirstBit" value="SPI_FIRST_BIT_MSB"/>
+            <ParametersSub name="VirtualCS" value="SPI_CS_HARDWARE_MODE"/>
+        </Parameters>
+    </SPI1>
+    <XMC_NORFlash-PSRAM-LCD_1>
+        <Mode>
+            <ModeSub name="Memory_device_type" value="LCD"/>
+            <ModeSub name="Data_Bus_Width" value="16_Bits"/>
+            <ModeSub name="LCD_RS line" value="A22"/>
+            <ModeSub name="Chip_Select" value="TRUE"/>
+        </Mode>
+    </XMC_NORFlash-PSRAM-LCD_1>
+    <NVIC>
+        <SysTick_Handler>0;0;0</SysTick_Handler>
+        <FLASH_IRQHandler>0;0;0</FLASH_IRQHandler>
+        <CRM_IRQHandler>0;0;0</CRM_IRQHandler>
+        <SPI1_IRQHandler>1;8;0</SPI1_IRQHandler>
+    </NVIC>
+    <GPIO>
+        <Signal SignalName="GPIO_Output" PinName="PE5">
+            <Parameters name="Label" value="LCD_RST"/>
+        </Signal>
+    </GPIO>
+    <ClockConfiguration>
+        <rtcsel>0</rtcsel>
+        <hext>8.000000</hext>
+        <hextdiv>2</hextdiv>
+        <pllhextdiv>0</pllhextdiv>
+        <pllrcs>1</pllrcs>
+        <pllmult>60</pllmult>
+        <sclkselect>1</sclkselect>
+        <ahbdiv>1</ahbdiv>
+        <apb1div>2</apb1div>
+        <apb2div>2</apb2div>
+        <usbdiv>4.0</usbdiv>
+        <hicktousb>1</hicktousb>
+        <hicktosclk>0</hicktosclk>
+        <clkout>0</clkout>
+        <clkoutdiv>1</clkoutdiv>
+        <adcdiv>6</adcdiv>
+    </ClockConfiguration>
+    <PINInfo>
+        <PinSub pinname="PE5" signalname="GPIO_Output" signaltype="3"/>
+        <PinSub pinname="PE6" signalname="XMC_A22" signaltype="2"/>
+        <PinSub pinname="PA4" signalname="SPI1_CS" signaltype="2"/>
+        <PinSub pinname="PA5" signalname="SPI1_SCK" signaltype="2"/>
+        <PinSub pinname="PA6" signalname="SPI1_MISO" signaltype="2"/>
+        <PinSub pinname="PA7" signalname="SPI1_MOSI" signaltype="2"/>
+        <PinSub pinname="PE7" signalname="XMC_D4" signaltype="2"/>
+        <PinSub pinname="PE8" signalname="XMC_D5" signaltype="2"/>
+        <PinSub pinname="PE9" signalname="XMC_D6" signaltype="2"/>
+        <PinSub pinname="PE10" signalname="XMC_D7" signaltype="2"/>
+        <PinSub pinname="PE11" signalname="XMC_D8" signaltype="2"/>
+        <PinSub pinname="PE12" signalname="XMC_D9" signaltype="2"/>
+        <PinSub pinname="PE13" signalname="XMC_D10" signaltype="2"/>
+        <PinSub pinname="PE14" signalname="XMC_D11" signaltype="2"/>
+        <PinSub pinname="PE15" signalname="XMC_D12" signaltype="2"/>
+        <PinSub pinname="PD8" signalname="XMC_D13" signaltype="2"/>
+        <PinSub pinname="PD9" signalname="XMC_D14" signaltype="2"/>
+        <PinSub pinname="PD10" signalname="XMC_D15" signaltype="2"/>
+        <PinSub pinname="PD14" signalname="XMC_D0" signaltype="2"/>
+        <PinSub pinname="PD15" signalname="XMC_D1" signaltype="2"/>
+        <PinSub pinname="PA13" signalname="DEBUG_JTMS_SWDIO" signaltype="2"/>
+        <PinSub pinname="PA14" signalname="DEBUG_JTCK_SWCLK" signaltype="2"/>
+        <PinSub pinname="PD0" signalname="XMC_D2" signaltype="2"/>
+        <PinSub pinname="PD1" signalname="XMC_D3" signaltype="2"/>
+        <PinSub pinname="PD4" signalname="XMC_NOE" signaltype="2"/>
+        <PinSub pinname="PD5" signalname="XMC_NWE" signaltype="2"/>
+        <PinSub pinname="PD7" signalname="XMC_NE1" signaltype="2"/>
+    </PINInfo>
+    <ProjectInfomation>
+        <ProjectName>AT32F403AVGT7_WorkBench</ProjectName>
+        <ProjectLocation>C:/Users/33110/Desktop</ProjectLocation>
+        <ToolchainIDE>MDK_V5</ToolchainIDE>
+        <KeepUserCode>true</KeepUserCode>
+        <MinHeapSize>0x200</MinHeapSize>
+        <MinStackSize>0x400</MinStackSize>
+        <UseFirmware>true</UseFirmware>
+        <PackageVersion>V2.1.9</PackageVersion>
+    </ProjectInfomation>
+</Root>
