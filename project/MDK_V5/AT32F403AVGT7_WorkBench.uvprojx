@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define>AT32F403AVGT7,USE_STDPERIPH_DRIVER,AT_START_F403A_V1</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\libraries\drivers\inc;..\..\libraries\cmsis\cm4\core_support;..\..\libraries\cmsis\cm4\device_support;..\inc</IncludePath>
+              <IncludePath>..\..\libraries\drivers\inc;..\..\libraries\cmsis\cm4\core_support;..\..\libraries\cmsis\cm4\device_support;..\inc;..\..\mysrc\drv</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -456,6 +456,16 @@
               <FileName>system_at32f403a_407.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\libraries\cmsis\cm4\device_support\system_at32f403a_407.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>mysrc/drv</GroupName>
+          <Files>
+            <File>
+              <FileName>delay.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\mysrc\drv\delay.c</FilePath>
             </File>
           </Files>
         </Group>

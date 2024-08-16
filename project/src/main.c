@@ -29,6 +29,7 @@
 
 /* private includes ----------------------------------------------------------*/
 /* add user code begin private includes */
+#include "delay.h"
 
 /* add user code end private includes */
 
@@ -59,6 +60,40 @@
 
 /* private user code ---------------------------------------------------------*/
 /* add user code begin 0 */
+
+/* the address of write data & command (xmc_a16) */
+#define  XMC_LCD_COMMAND                 0x603FFFFE
+#define  XMC_LCD_DATA                    0x60400000
+
+/**
+  * @brief  this function is write command to lcd.
+  * @param  command : the command to write.
+  * @retval none
+  */
+void lcd_wr_command(uint16_t command)
+{
+  *(__IO uint16_t*) XMC_LCD_COMMAND = command;
+}
+
+/**
+  * @brief  this function is write data to lcd.
+  * @param  data : the data to write.
+  * @retval none
+  */
+void lcd_wr_data(uint16_t data)
+{
+  *(__IO uint16_t*) XMC_LCD_DATA = data;
+}
+
+uint16_t lcd_rd_data(void)
+{
+  uint16_t data;
+
+  data = *(uint16_t*)XMC_LCD_DATA;
+
+  return data;
+}
+
 
 /* add user code end 0 */
 
@@ -98,13 +133,15 @@ int main(void)
   wk_gpio_config();
 
   /* add user code begin 2 */
+  delay_init();
 
   /* add user code end 2 */
 
   while(1)
   {
     /* add user code begin 3 */
-
+    lcd_wr_command(0xa5a5);
+    delay_sec(1);
     /* add user code end 3 */
   }
 }
