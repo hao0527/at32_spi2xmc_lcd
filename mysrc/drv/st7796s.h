@@ -23,8 +23,8 @@ extern "C"
  *********************/
 #define ST7796S_RST                 LCD_RST_GPIO_PORT, LCD_RST_PIN
 #define ST7796S_INVERT_COLORS       1
-#define ST7796S_DISPLAY_ORIENTATION 1
-#define CONFIG_LV_PREDEFINED_DISPLAY_M5STACK
+#define ST7796S_DISPLAY_ORIENTATION 0
+#define CONFIG_LV_PREDEFINED_DISPLAY_WROVER4
 
 
 /*******************

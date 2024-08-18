@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define>AT32F403AVGT7,USE_STDPERIPH_DRIVER,AT_START_F403A_V1</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\libraries\drivers\inc;..\..\libraries\cmsis\cm4\core_support;..\..\libraries\cmsis\cm4\device_support;..\inc;..\..\mysrc\drv</IncludePath>
+              <IncludePath>..\..\libraries\drivers\inc;..\..\libraries\cmsis\cm4\core_support;..\..\libraries\cmsis\cm4\device_support;..\inc;..\..\mysrc\drv;..\..\mysrc\mid;..\..\mysrc\app</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -471,6 +471,24 @@
               <FileName>st7796s.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\mysrc\drv\st7796s.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>mysrc/mid</GroupName>
+        </Group>
+        <Group>
+          <GroupName>mysrc/app</GroupName>
+          <Files>
+            <File>
+              <FileName>dog1.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\mysrc\app\dog1.c</FilePath>
+            </File>
+            <File>
+              <FileName>dog2.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\mysrc\app\dog2.c</FilePath>
             </File>
           </Files>
         </Group>

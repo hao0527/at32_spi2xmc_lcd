@@ -32,6 +32,7 @@
 #include <string.h>
 #include "delay.h"
 #include "st7796s.h"
+#include "image.h"
 /* add user code end private includes */
 
 /* private typedef -----------------------------------------------------------*/
@@ -104,29 +105,22 @@ int main(void)
 
   /* add user code begin 2 */
   delay_init();
-  delay_ms(500);
+
   st7796s_init();
 
   memset(lcdBuff1, 0xaaaa, sizeof(lcdBuff1));
   memset(lcdBuff2, 0x5555, sizeof(lcdBuff2));
   memset(lcdBuff3, 0xffff, sizeof(lcdBuff3));
-  st7796s_flush(&area5, lcdBuff3[0]);
+  st7796s_flush(&area5, lcdBuff3[0]); // 320 * 320 pixels buff in ram need 7.22ms
 
   /* add user code end 2 */
 
   while(1)
   {
     /* add user code begin 3 */
-    st7796s_flush(&area1, lcdBuff1[0]);
-    st7796s_flush(&area2, lcdBuff2[0]);
-    st7796s_flush(&area3, lcdBuff2[0]);
-    st7796s_flush(&area4, lcdBuff1[0]);
-
+    st7796s_flush(&area5, (lcd_color_t *)gImage_dog1);
     delay_sec(1);
-    st7796s_flush(&area1, lcdBuff2[0]);
-    st7796s_flush(&area2, lcdBuff1[0]);
-    st7796s_flush(&area3, lcdBuff1[0]);
-    st7796s_flush(&area4, lcdBuff2[0]);
+    st7796s_flush(&area5, (lcd_color_t *)gImage_dog2);
     delay_sec(1);
     /* add user code end 3 */
   }
