@@ -33,11 +33,12 @@ static void st7796s_set_orientation(uint8_t orientation);
 
 static void st7796s_send_cmd(uint8_t cmd);
 static void st7796s_send_data(uint8_t *data, uint16_t length);
+static void st7796s_recv_data(uint8_t *data, uint16_t length);
 static void st7796s_send_color(uint16_t *data, uint16_t length);
 
 static inline void lcd_wr_command(uint16_t command);
 static inline void lcd_wr_data(uint16_t data);
-// static inline uint16_t lcd_rd_data(void);
+static inline uint16_t lcd_rd_data(void);
 
 /**********************
  *  STATIC VARIABLES
@@ -86,7 +87,13 @@ void st7796s_init(void)
 	gpio_bits_write(ST7796S_RST, TRUE);
 	delay_ms(100);
 
-	// ESP_LOGI(TAG, "Initialization.");
+    uint8_t id[4];
+	st7796s_send_cmd(0xD3);
+    st7796s_recv_data(id, 4);
+	if (id[2] != 0x77 || id[3] != 0x96)
+	{
+		while(1);	// id check error
+	}
 
 	//Send all the commands
 	uint16_t cmd = 0;
@@ -168,6 +175,13 @@ static void st7796s_send_data(uint8_t *data, uint16_t length)
     }
 }
 
+static void st7796s_recv_data(uint8_t *data, uint16_t length)
+{
+    for (int i = 0; i < length; i++) {
+        data[i] = (uint8_t)lcd_rd_data();
+    }
+}
+
 static void st7796s_send_color(uint16_t *data, uint16_t length)
 {
     for (int i = 0; i < length; i++) {
@@ -187,17 +201,15 @@ static void st7796s_set_orientation(uint8_t orientation)
 	uint8_t data[] = {0x48, 0x88, 0x28, 0xE8};
 #endif
 
-	// ESP_LOGI(TAG, "0x36 command value: 0x%02X", data[orientation]);
-
 	lcd_wr_command(0x36);
 	st7796s_send_data((void *)&data[orientation], 1);
 }
 
 //////////////////////////////////////xmc///////////////////////////////////////
 
-/* the address of write data & command (xmc_a16) */
-#define  XMC_LCD_COMMAND                 0x603FFFFE
-#define  XMC_LCD_DATA                    0x60400000
+/* the address of write data & command (xmc_a22) */
+#define  XMC_LCD_COMMAND                 0x607FFFFE
+#define  XMC_LCD_DATA                    0x60800000
 
 /**
   * @brief  this function is write command to lcd.
@@ -219,11 +231,11 @@ static inline void lcd_wr_data(uint16_t data)
     *(__IO uint16_t*) XMC_LCD_DATA = data;
 }
 
-// static inline uint16_t lcd_rd_data(void)
-// {
-//     uint16_t data;
+static inline uint16_t lcd_rd_data(void)
+{
+    uint16_t data;
 
-//     data = *(uint16_t*)XMC_LCD_DATA;
+    data = *(uint16_t*)XMC_LCD_DATA;
 
-//     return data;
-// }
+    return data;
+}

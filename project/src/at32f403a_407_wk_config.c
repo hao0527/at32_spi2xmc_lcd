@@ -496,6 +496,8 @@ void wk_xmc_bank1_nor_sram1_init(void)
   xmc_norsram_init_type  xmc_norsram_init_struct;
   xmc_norsram_timing_init_type rw_timing_struct;  
 
+  xmc_norsram_timing_init_type w_timing_struct;
+
   /* add user code begin wk_xmc_bank1_nor_sram1_init 1 */
 
   /* add user code end wk_xmc_bank1_nor_sram1_init 1 */
@@ -514,24 +516,34 @@ void wk_xmc_bank1_nor_sram1_init(void)
   xmc_norsram_init_struct.wait_signal_config = XMC_WAIT_SIGNAL_SYN_BEFORE;
   xmc_norsram_init_struct.write_enable = XMC_WRITE_OPERATION_ENABLE;
   xmc_norsram_init_struct.wait_signal_enable = XMC_WAIT_SIGNAL_DISABLE;
-  xmc_norsram_init_struct.write_timing_enable = XMC_WRITE_TIMING_DISABLE;
+  xmc_norsram_init_struct.write_timing_enable = XMC_WRITE_TIMING_ENABLE;
   xmc_norsram_init_struct.write_burst_syn = XMC_WRITE_BURST_SYN_DISABLE;
   xmc_nor_sram_init(&xmc_norsram_init_struct);
 
   /* timing configuration */
-  xmc_norsram_timing_default_para_init(&rw_timing_struct, &rw_timing_struct);
+  xmc_norsram_timing_default_para_init(&rw_timing_struct, &w_timing_struct);
 
   rw_timing_struct.subbank = XMC_BANK1_NOR_SRAM1;
-  rw_timing_struct.write_timing_enable = XMC_WRITE_TIMING_DISABLE;
+  rw_timing_struct.write_timing_enable = XMC_WRITE_TIMING_ENABLE;
   rw_timing_struct.addr_hold_time = 15;
   rw_timing_struct.addr_setup_time = 15;
-  rw_timing_struct.data_setup_time = 255;
+  rw_timing_struct.data_setup_time = 15;
   rw_timing_struct.data_latency_time = 15;
-  rw_timing_struct.bus_latency_time = 15;
+  rw_timing_struct.bus_latency_time = 0;
   rw_timing_struct.clk_psc = 1;
   rw_timing_struct.mode = XMC_ACCESS_MODE_A;
 
-  xmc_nor_sram_timing_config(&rw_timing_struct, &rw_timing_struct);
+  w_timing_struct.subbank = XMC_BANK1_NOR_SRAM1;
+  w_timing_struct.write_timing_enable = XMC_WRITE_TIMING_ENABLE;
+  w_timing_struct.addr_hold_time = 15;
+  w_timing_struct.addr_setup_time = 2;
+  w_timing_struct.data_setup_time = 2;
+  w_timing_struct.data_latency_time = 15;
+  w_timing_struct.bus_latency_time = 0;
+  w_timing_struct.clk_psc = 1;
+  w_timing_struct.mode = XMC_ACCESS_MODE_A;
+
+  xmc_nor_sram_timing_config(&rw_timing_struct, &w_timing_struct);
 
   /* bus turnaround phase for consecutive read duration and consecutive write duration */
   xmc_ext_timing_config(XMC_BANK1_NOR_SRAM1, 8, 8);
