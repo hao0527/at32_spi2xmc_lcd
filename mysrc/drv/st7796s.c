@@ -34,7 +34,7 @@ static void st7796s_set_orientation(uint8_t orientation);
 static void st7796s_send_cmd(uint8_t cmd);
 static void st7796s_send_data(uint8_t *data, uint16_t length);
 static void st7796s_recv_data(uint8_t *data, uint16_t length);
-static void st7796s_send_color(uint16_t *data, uint16_t length);
+static void st7796s_send_color(uint16_t *data, uint32_t length);
 
 static inline void lcd_wr_command(uint16_t command);
 static inline void lcd_wr_data(uint16_t data);
@@ -140,7 +140,7 @@ void st7796s_flush(const lcd_area_t *area, lcd_color_t *color_map)
 	/*Memory write*/
 	st7796s_send_cmd(0x2C);
 
-	uint32_t size = (area->x2 - area->x1) * (area->y2 - area->y1);
+	uint32_t size = (area->x2 - area->x1 + 1) * (area->y2 - area->y1 + 1);
 
 	st7796s_send_color((void *)color_map, size);
 }
@@ -182,7 +182,7 @@ static void st7796s_recv_data(uint8_t *data, uint16_t length)
     }
 }
 
-static void st7796s_send_color(uint16_t *data, uint16_t length)
+static void st7796s_send_color(uint16_t *data, uint32_t length)
 {
     for (int i = 0; i < length; i++) {
         lcd_wr_data(data[i]);

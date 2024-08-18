@@ -29,6 +29,7 @@
 
 /* private includes ----------------------------------------------------------*/
 /* add user code begin private includes */
+#include <string.h>
 #include "delay.h"
 #include "st7796s.h"
 /* add user code end private includes */
@@ -50,7 +51,10 @@
 
 /* private variables ---------------------------------------------------------*/
 /* add user code begin private variables */
-
+lcd_area_t  area1 = {0,0,9,9},     area2 = {310,0,319,9},
+            area3 = {0,310,9,319}, area4 = {310,310,319,319};
+lcd_area_t  area5 = {0,0,319,319};
+lcd_color_t lcdBuff1[10][10], lcdBuff2[10][10], lcdBuff3[320][320];
 /* add user code end private variables */
 
 /* private function prototypes --------------------------------------------*/
@@ -103,11 +107,26 @@ int main(void)
   delay_ms(500);
   st7796s_init();
 
+  memset(lcdBuff1, 0xaaaa, sizeof(lcdBuff1));
+  memset(lcdBuff2, 0x5555, sizeof(lcdBuff2));
+  memset(lcdBuff3, 0xffff, sizeof(lcdBuff3));
+  st7796s_flush(&area5, lcdBuff3[0]);
+
   /* add user code end 2 */
 
   while(1)
   {
     /* add user code begin 3 */
+    st7796s_flush(&area1, lcdBuff1[0]);
+    st7796s_flush(&area2, lcdBuff2[0]);
+    st7796s_flush(&area3, lcdBuff2[0]);
+    st7796s_flush(&area4, lcdBuff1[0]);
+
+    delay_sec(1);
+    st7796s_flush(&area1, lcdBuff2[0]);
+    st7796s_flush(&area2, lcdBuff1[0]);
+    st7796s_flush(&area3, lcdBuff1[0]);
+    st7796s_flush(&area4, lcdBuff2[0]);
     delay_sec(1);
     /* add user code end 3 */
   }
