@@ -177,6 +177,23 @@ void system_core_clock_update(void)
   /* ahbclk frequency */
   system_core_clock = system_core_clock >> div_value;
 }
+
+#define SRAM_96k 0xFF
+#define SRAM_224k 0xFE
+static uint32_t f_eopb0;
+void Extend_SRAM(void)
+{
+  f_eopb0 = *(uint32_t*)(0x1FFFF810);
+  if((f_eopb0 & 0xFF) != 0xFE) // check if RAM has been set to 224K, if not, change EOPB0
+  {
+    flash_unlock();
+    flash_user_system_data_erase();
+    flash_user_system_data_program(0x1FFFF810, SRAM_224k);
+    flash_lock();
+    nvic_system_reset();
+  }
+}
+
 /**
   * @}
   */
