@@ -28,6 +28,14 @@
             <ModeSub name="LCD_RS line" value="A22"/>
             <ModeSub name="Chip_Select" value="TRUE"/>
         </Mode>
+        <Parameters>
+            <ParametersSub name="RW_Timing_Diff" value="XMC_WRITE_TIMING_ENABLE"/>
+            <ParametersSub name="Data_setup_time" value="15"/>
+            <ParametersSub name="Bus_latency" value="1"/>
+            <ParametersSub name="Write_Address_setup_time" value="2"/>
+            <ParametersSub name="Write_Data_setup_time" value="2"/>
+            <ParametersSub name="Write_Bus_latency" value="1"/>
+        </Parameters>
     </XMC_NORFlash-PSRAM-LCD_1>
     <NVIC>
         <SysTick_Handler>0;0;0</SysTick_Handler>
