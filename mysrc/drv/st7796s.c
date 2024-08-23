@@ -205,6 +205,37 @@ static void st7796s_set_orientation(uint8_t orientation)
     st7796s_send_data((void *)&data[orientation], 1);
 }
 
+//////////////////////////////////////func//////////////////////////////////////
+void lcd_fill(const lcd_area_t *area, lcd_color_t color)
+{
+    uint8_t data[4];
+
+    /*Column addresses*/
+    st7796s_send_cmd(0x2A);
+    data[0] = (area->x1 >> 8) & 0xFF;
+    data[1] = area->x1 & 0xFF;
+    data[2] = (area->x2 >> 8) & 0xFF;
+    data[3] = area->x2 & 0xFF;
+    st7796s_send_data(data, 4);
+
+    /*Page addresses*/
+    st7796s_send_cmd(0x2B);
+    data[0] = (area->y1 >> 8) & 0xFF;
+    data[1] = area->y1 & 0xFF;
+    data[2] = (area->y2 >> 8) & 0xFF;
+    data[3] = area->y2 & 0xFF;
+    st7796s_send_data(data, 4);
+
+    /*Memory write*/
+    st7796s_send_cmd(0x2C);
+
+    uint32_t size = (area->x2 - area->x1 + 1) * (area->y2 - area->y1 + 1);
+
+    for (int i = 0; i < size; i++) {
+        lcd_wr_data(color);
+    }
+}
+
 //////////////////////////////////////xmc///////////////////////////////////////
 
 /* the address of write data & command (xmc_a22) */

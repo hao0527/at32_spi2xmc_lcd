@@ -115,6 +115,8 @@ typedef uint16_t lcd_color_t;
 void st7796s_init(void);
 void st7796s_flush(const lcd_area_t *area, lcd_color_t *color_map);
 
+void lcd_fill(const lcd_area_t *area, lcd_color_t color);
+
   /**********************
  *      MACROS
  **********************/
