@@ -33,6 +33,7 @@
 #include "delay.h"
 #include "st7796s.h"
 #include "image.h"
+#include "hue.h"
 /* add user code end private includes */
 
 /* private typedef -----------------------------------------------------------*/
@@ -56,6 +57,8 @@ lcd_area_t  area1 = {0,0,9,9},     area2 = {310,0,319,9},
             area3 = {0,310,9,319}, area4 = {310,310,319,319};
 lcd_area_t  area5 = {0,0,319,319};
 lcd_color_t lcdBuff1[10][10], lcdBuff2[10][10], lcdBuff3[320][320];
+lcd_color_t color1;
+float huv = 0;
 /* add user code end private variables */
 
 /* private function prototypes --------------------------------------------*/
@@ -118,10 +121,13 @@ int main(void)
   while(1)
   {
     /* add user code begin 3 */
-    st7796s_flush(&area5, (lcd_color_t *)gImage_dog1);
-    delay_sec(1);
-    st7796s_flush(&area5, (lcd_color_t *)gImage_dog2);
-    delay_sec(1);
+    huv += 0.01f;
+    if (huv >= 1) {
+      huv = 0;
+    }
+    color1 = rgb565_from_hue(huv);
+    lcd_fill(&area5, color1);
+    delay_ms(1);
     /* add user code end 3 */
   }
 }

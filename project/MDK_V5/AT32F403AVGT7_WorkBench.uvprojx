@@ -490,6 +490,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\mysrc\app\dog2.c</FilePath>
             </File>
+            <File>
+              <FileName>hue.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\mysrc\app\hue.c</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
